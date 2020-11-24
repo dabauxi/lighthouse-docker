@@ -2,15 +2,14 @@
 #
 # Starts a beacon node.
 
-DEFAULT_TESTNET=medalla
+DEFAULT_NETWORK=mainnet
 
 if [ "$START_VALIDATOR" != "" ]; then
 	ETH1_FLAG=--eth1
 fi
 
-
-if [ "$TESTNET" = "" ]; then
-	TESTNET=$DEFAULT_TESTNET
+if [ "$NETWORK" = "" ]; then
+	NETWORK=$DEFAULT_NETWORK
 fi
 
 if [ "$ENABLE_METRICS" != "" ]; then
