@@ -27,7 +27,7 @@ fi
 
 exec lighthouse \
 	--debug-level $DEBUG_LEVEL \
-	--testnet $TESTNET \
+	--network $NETWORK \
 	beacon_node \
 	--eth1-endpoint $VOTING_ETH1_NODE \
 	--http \
