@@ -24,6 +24,9 @@ if [ "$START_SLASHER" != "" ]; then
 	SLASHER_FLAG="--slasher"
 fi
 
+if [ "$SEARCH_BLOCKS" != ""]; then
+	SEARCH_BLOCKS_PARAM="--eth1-blocks-per-log-query $SEARCH_BLOCKS"
+fi
 
 exec lighthouse \
 	--debug-level $DEBUG_LEVEL \
@@ -38,4 +41,6 @@ exec lighthouse \
 	--max-skip-slots 700 \
 	$GRAFFITI_PARAM \
 	$ETH1_FLAG \
-	$SLASHER_FLAG
+	$SLASHER_FLAG \
+	$SEARCH_BLOCKS_PARAM
+
