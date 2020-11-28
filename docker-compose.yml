@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
     beacon_node:
-        image: sigp/lighthouse:latest
+        image: sigp/lighthouse:v1.0.2
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts
@@ -16,7 +16,7 @@ services:
         command: sh /root/scripts/start-beacon-node.sh
         restart: always
     validator_client:
-        image: sigp/lighthouse:latest
+        image: sigp/lighthouse:v1.0.2
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts
@@ -27,7 +27,7 @@ services:
         command: sh /root/scripts/start-validator-client.sh
         restart: always
     geth:
-        image: ethereum/client-go
+        image: ethereum/client-go:stable
         entrypoint: /bin/sh
         volumes:
             - ${GETH_DATA}:/root/.ethereum
