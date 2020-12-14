@@ -28,6 +28,7 @@ if [ "$SEARCH_BLOCKS" != ""]; then
 	SEARCH_BLOCKS_PARAM="--eth1-blocks-per-log-query $SEARCH_BLOCKS"
 fi
 
+
 exec lighthouse \
 	--debug-level $DEBUG_LEVEL \
 	--network $NETWORK \
@@ -36,9 +37,6 @@ exec lighthouse \
 	--http \
 	--http-address 0.0.0.0 \
 	$METRICS_PARAMS \
-	--ws \
-	--ws-address 0.0.0.0 \
-	--max-skip-slots 700 \
 	$GRAFFITI_PARAM \
 	$ETH1_FLAG \
 	$SLASHER_FLAG \

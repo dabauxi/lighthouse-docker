@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
     beacon_node:
-        image: sigp/lighthouse:v1.0.3
+        image: sigp/lighthouse:v1.0.4
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts
@@ -16,13 +16,15 @@ services:
         command: sh /root/scripts/start-beacon-node.sh
         restart: always
     validator_client:
-        image: sigp/lighthouse:v1.0.3
+        image: sigp/lighthouse:v1.0.4
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts
             - ./validator_keys:/root/validator_keys
         depends_on:
             - beacon_node
+        ports:
+            - 5064:5064/tcp     # metrics endpoint
         env_file: .env
         command: sh /root/scripts/start-validator-client.sh
         restart: always
