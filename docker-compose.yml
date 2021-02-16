@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
     beacon_node:
-        image: sigp/lighthouse:v1.1.0
+        image: sigp/lighthouse:v1.1.1
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts
@@ -16,7 +16,7 @@ services:
         command: sh /root/scripts/start-beacon-node.sh
         restart: always
     validator_client:
-        image: sigp/lighthouse:v1.1.0
+        image: sigp/lighthouse:v1.1.1
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts
