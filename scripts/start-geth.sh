@@ -8,11 +8,14 @@ if [ "$NETWORK" = "" ]; then
 	NETWORK=$DEFAULT_NETWORK
 fi
 
+if [ "$DISABLE_SNAPSHOT" != "" ]; then
+	SNAPSHOT_FLAG="--snapshot=false"
+fi
 
 if [ "$START_GETH" != "" ]; then
 	if [ "$NETWORK" != "$DEFAULT_NETWORK" ]; then
-		exec geth --goerli --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable --nousb
+		exec geth --goerli --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable --nousb $SNAPSHOT_FLAG
 	else
-		exec geth --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable --nousb
+		exec geth --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable --nousb $SNAPSHOT_FLAG
 	fi
 fi
