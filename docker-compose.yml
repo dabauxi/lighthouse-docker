@@ -5,7 +5,7 @@ services:
         image: sigp/lighthouse:${LIGHTHOUSE_VERSION}
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
-            - ./scripts:/root/scripts
+            - ./scripts:/root/scripts:ro
         ports:
             - 5052:5052/tcp
             - 5053:5053/tcp
