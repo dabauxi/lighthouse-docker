@@ -14,8 +14,8 @@ fi
 
 if [ "$START_GETH" != "" ]; then
 	if [ "$NETWORK" != "$DEFAULT_NETWORK" ]; then
-		exec geth --goerli --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable
+		exec geth --goerli --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable $SNAPSHOT_FLAG
 	else
-		exec geth --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable
+		exec geth --http --http.addr "0.0.0.0" --http.vhosts=* --http.api "eth,net" --ipcdisable $SNAPSHOT_FLAG
 	fi
 fi
