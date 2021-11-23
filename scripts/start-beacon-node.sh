@@ -40,13 +40,18 @@ if [ "$ENABLE_MONITORING_MANUAL" != "" ]; then
 	ENABLE_MONITORING_MANUAL_PARAMS="--validator-monitor-pubkeys $ENABLE_MONITORING_MANUAL"
 fi
 
+if [ "$MONITORING_SERVICE_ENDPOINT" != "" ]; then
+	MONITORING_SERVICE_PARAMS="--monitoring-endpoint $MONITORING_SERVICE_ENDPOINT"
+fi
+
 if [ "$ENABLE_FULL_NETWORK_VIEW" != "" ]; then
 	ENABLE_FULL_NETWORK_VIEW_PARAMS="--subscribe-all-subnets --import-all-attestations"
 fi
 
-if [ "$MONITORING_ENDPOINT" != "" ]; then
-	MONITORING_ENDPOINT_PARAM="--monitoring-endpoint $MONITORING_ENDPOINT"
+if [ "$CHECKPOINT_SYNC_URL" != "" ]; then
+	CHECKPOINT_SYNC_URL_PARAM="--checkpoint-sync-url $CHECKPOINT_SYNC_URL"
 fi
+
 
 exec lighthouse \
 	--debug-level $DEBUG_LEVEL \
@@ -64,4 +69,5 @@ exec lighthouse \
 	$ENABLE_MONITORING_AUTO_FLAG \
 	$ENABLE_MONITORING_MANUAL_PARAMS \
 	$ENABLE_FULL_NETWORK_VIEW_PARAMS \
-	$MONITORING_ENDPOINT_PARAM
+	$MONITORING_SERVICE_PARAMS \
+	$CHECKPOINT_SYNC_URL_PARAM
