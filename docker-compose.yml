@@ -1,20 +1,40 @@
 version: "3.0"
 
 services:
+    vpn:
+      image: ghcr.io/bubuntux/nordvpn
+      cap_add:
+        - NET_ADMINs
+      environment:
+        - USER=
+        - PASS=
+        - CONNECT=p2p
+        - TECHNOLOGY=NordLynx
+        - NETWORK=192.168.1.0/24
+        - PORTS=30303;9000
+        - CHECK_CONNECTION_INTERVAL=60
+      ports:
+        - 30303:30303/tcp
+        - 30303:30303/udp
+        - 5052:5052/tcp
+        - 5053:5053/tcp
+        - 5054:5054/tcp
+        - 9000:9000/tcp
+        - 9000:9000/udp
+        - 5064:5064/tcp
+      sysctls:
+        - net.ipv6.conf.all.disable_ipv6=1  # Recomended if using ipv4 only
     beacon_node:
         image: sigp/lighthouse:${LIGHTHOUSE_VERSION}
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
             - ./scripts:/root/scripts:ro
-        ports:
-            - 5052:5052/tcp
-            - 5053:5053/tcp
-            - 5054:5054/tcp     # metrics endpoint
-            - 9000:9000/tcp
-            - 9000:9000/udp
         env_file: .env
         command: sh /root/scripts/start-beacon-node.sh
         restart: always
+        network_mode: service:vpn
+        depends_on:
+          - vpn
     validator_client:
         image: sigp/lighthouse:${LIGHTHOUSE_VERSION}
         volumes:
@@ -23,20 +43,20 @@ services:
             - ./validator_keys:/root/validator_keys
         depends_on:
             - beacon_node
-        ports:
-            - 5064:5064/tcp     # metrics endpoint
+            - vpn
         env_file: .env
         command: sh /root/scripts/start-validator-client.sh
         restart: always
+        network_mode: service:vpn
     geth:
         image: ethereum/client-go:${GETH_VERSION}
         entrypoint: /bin/sh
         volumes:
             - ${GETH_DATA}:/root/.ethereum
             - ./scripts:/root/scripts
-        ports:
-            - 30303:30303/tcp
-            - 30303:30303/udp
         env_file: .env
         command: /root/scripts/start-geth.sh
         restart: always
+        network_mode: service:vpn
+        depends_on:
+          - vpn
