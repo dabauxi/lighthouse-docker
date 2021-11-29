@@ -4,7 +4,7 @@ services:
     vpn:
       image: ghcr.io/bubuntux/nordvpn
       cap_add:
-        - NET_ADMINs
+        - NET_ADMIN
       environment:
         - USER=
         - PASS=
