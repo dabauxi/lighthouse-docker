@@ -23,7 +23,10 @@ services:
         - 9000:9000/udp
         - 5064:5064/tcp
       sysctls:
-        - net.ipv6.conf.all.disable_ipv6=1  # Recomended if using ipv4 only
+        - net.ipv6.conf.all.disable_ipv6=1
+      links:
+        - beacon_node
+        - geth
     beacon_node:
         image: sigp/lighthouse:${LIGHTHOUSE_VERSION}
         volumes:
