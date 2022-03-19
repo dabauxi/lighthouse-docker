@@ -28,15 +28,17 @@ services:
         env_file: .env
         command: sh /root/scripts/start-validator-client.sh
         restart: always
-    geth:
-        image: ethereum/client-go:${GETH_VERSION}
-        entrypoint: /bin/sh
+    nethermind:
+        image: nethermind/nethermind:${NETHERMIND_VERSION}
+        entrypoint: /bin/bash
         volumes:
-            - ${GETH_DATA}:/root/.ethereum
-            - ./scripts:/root/scripts
+            - ${ETH1_DATA}:/nethermind/data
+            - ./scripts:/nethermind/scripts
+            - ./nethermind/mainnet.cfg:/nethermind/configs/mainnet.cfg:ro
         ports:
-            - 30303:30303/tcp
-            - 30303:30303/udp
-        env_file: .env
-        command: /root/scripts/start-geth.sh
+            - 8545:8545/tcp
+            - 8545:8545/udp
+        command: ./scripts/start-nethermind.sh
         restart: always
+        env_file: .env
+
