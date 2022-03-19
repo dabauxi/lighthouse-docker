@@ -33,11 +33,11 @@ services:
         entrypoint: /bin/bash
         volumes:
             - ${ETH1_DATA}:/nethermind/data
-            - ./scripts:/nethermind/scripts
+            - ./scripts:/nethermind/scripts:ro
             - ./nethermind/mainnet.cfg:/nethermind/configs/mainnet.cfg:ro
         ports:
-            - 8545:8545/tcp
-            - 8545:8545/udp
+            - 30303:30303/tcp
+            - 30303:30303/udp
         command: ./scripts/start-nethermind.sh
         restart: always
         env_file: .env
