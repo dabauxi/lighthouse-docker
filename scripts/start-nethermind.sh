@@ -2,4 +2,10 @@
 #
 # Starts a local nethermind node.
 
-cd /nethermind && ./Nethermind.Runner --JsonRpc.Enabled true  --JsonRpc.EnabledModules "Eth,Net" --JsonRpc.Host 0.0.0.0 --datadir data --Pruning.Mode "Full"
+
+if [ "$FULL_PRUNE" != "" ]; then
+	PRUNING_FLAG='--Pruning.Mode "Full"'
+fi
+
+
+cd /nethermind && ./Nethermind.Runner --JsonRpc.Enabled true  --JsonRpc.EnabledModules "Eth,Net" --JsonRpc.Host 0.0.0.0 --datadir data $PRUNING_FLAG

@@ -32,7 +32,7 @@ services:
         image: nethermind/nethermind:${NETHERMIND_VERSION}
         entrypoint: /bin/bash
         volumes:
-            - ${ETH1_DATA}:/nethermind/data
+            - ${NETHERMIND_DATA}:/nethermind/data
             - ./scripts:/nethermind/scripts:ro
             - ./nethermind/mainnet.cfg:/nethermind/configs/mainnet.cfg:ro
         ports:
