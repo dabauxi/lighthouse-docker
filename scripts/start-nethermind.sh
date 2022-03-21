@@ -8,4 +8,4 @@ if [ "$FULL_PRUNE" != "" ]; then
 fi
 
 
-cd /nethermind && ./Nethermind.Runner --config mainnet_pruned --JsonRpc.Enabled true  --JsonRpc.EnabledModules "Eth,Net" --JsonRpc.Host 0.0.0.0 --datadir data $PRUNING_FLAG
+./Nethermind.Runner --config mainnet_pruned --JsonRpc.Enabled true  --JsonRpc.EnabledModules "Eth,Net" --JsonRpc.Host 0.0.0.0 --datadir data $PRUNING_FLAG
