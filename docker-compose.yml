@@ -34,7 +34,6 @@ services:
         volumes:
             - ${NETHERMIND_DATA}:/nethermind/data
             - ./scripts:/nethermind/scripts:ro
-            - ./nethermind/mainnet.cfg:/nethermind/configs/mainnet.cfg:ro
         ports:
             - 30303:30303/tcp
             - 30303:30303/udp
