@@ -32,9 +32,11 @@ services:
         image: nethermind/nethermind:${NETHERMIND_VERSION}
         entrypoint: /bin/bash
         volumes:
-            - ${NETHERMIND_DATA}:/nethermind/data
+            - /home/paul/code/lighthouse-docker/test:/nethermind/data
             - ./scripts:/nethermind/scripts:ro
         ports:
+            - 8545:8545/tcp
+            - 8545:8545/udp
             - 30303:30303/tcp
             - 30303:30303/udp
         command: ./scripts/start-nethermind.sh
