@@ -28,15 +28,13 @@ services:
         env_file: .env
         command: sh /root/scripts/start-validator-client.sh
         restart: always
-    geth:
-        image: ethereum/client-go:${GETH_VERSION}
-        entrypoint: /bin/sh
+    besu:
+        image: hyperledger/besu:${BESU_VERSION}
+        entrypoint: bash
         volumes:
-            - ${GETH_DATA}:/root/.ethereum
-            - ./scripts:/root/scripts
+            - ${BESU_DATA}:/var/lib/besu
+            - ./scripts:/opt/besu/scripts
+        command: scripts/start-besu.sh
         ports:
-            - 30303:30303/tcp
-            - 30303:30303/udp
-        env_file: .env
-        command: /root/scripts/start-geth.sh
-        restart: always
+            - '8545:8545'
+            - '30303:30303'
