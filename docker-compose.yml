@@ -31,6 +31,7 @@ services:
     besu:
         image: hyperledger/besu:${BESU_VERSION}
         entrypoint: bash
+        env_file: .env
         volumes:
             - ${BESU_DATA}:/var/lib/besu
             - ./scripts:/opt/besu/scripts
