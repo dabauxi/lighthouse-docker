@@ -2,4 +2,4 @@
 #
 # Start pruning of geth.
 
-docker-compose stop geth && docker-compose run geth /root/scripts/prune-geth.sh
+docker-compose stop geth && docker-compose run --rm geth /root/scripts/prune-geth.sh
