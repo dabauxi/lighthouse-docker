@@ -2,5 +2,5 @@
 
 docker-compose pull besu
 # stop and remove containers
-yes | docker-compose rm -s -v besu
+docker-compose stop -t 60 besu && yes | docker-compose rm -v besu
 docker-compose up -d besu
