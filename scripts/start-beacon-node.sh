@@ -4,6 +4,8 @@
 
 DEFAULT_NETWORK=mainnet
 
+EXECUTION_ENDPOINTS_PARAMS="--execution-endpoints http://127.0.0.1:8551"
+
 if [ "$START_VALIDATOR" != "" ]; then
 	ETH1_FLAG=--eth1
 fi
@@ -52,6 +54,10 @@ if [ "$CHECKPOINT_SYNC_URL" != "" ]; then
 	CHECKPOINT_SYNC_URL_PARAM="--checkpoint-sync-url $CHECKPOINT_SYNC_URL"
 fi
 
+if [ "$EXECUTION_ENDPOINTS" != "" ]; then
+	EXECUTION_ENDPOINTS_PARAMS="--execution-endpoiints $EXECUTION_ENDPOINTS"
+fi
+
 exec lighthouse \
 	--debug-level $DEBUG_LEVEL \
 	--network $NETWORK \
@@ -69,4 +75,6 @@ exec lighthouse \
 	$ENABLE_MONITORING_MANUAL_PARAMS \
 	$ENABLE_FULL_NETWORK_VIEW_PARAMS \
 	$MONITORING_SERVICE_PARAMS \
-	$CHECKPOINT_SYNC_URL_PARAM
+	$CHECKPOINT_SYNC_URL_PARAM \
+	$EXECUTION_ENDPOINTS_PARAMS \
+	--jwt-secrets="/secrets/jwtsecret"
