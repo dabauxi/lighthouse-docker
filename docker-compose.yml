@@ -15,12 +15,13 @@ services:
         env_file: .env
         command: sh /root/scripts/start-beacon-node.sh
         restart: always
+        stop_grace_period: 3m
     validator_client:
         image: sigp/lighthouse:${LIGHTHOUSE_VERSION}
         volumes:
             - ${LIGHTHOUSE_DATA}:/root/.lighthouse
-            - ./scripts:/root/scripts
-            - ./validator_keys:/root/validator_keys
+            - ./scripts:/root/scripts:ro
+            - ./validator_keys:/root/validator_keys:ro
         depends_on:
             - beacon_node
         ports:
@@ -28,6 +29,7 @@ services:
         env_file: .env
         command: sh /root/scripts/start-validator-client.sh
         restart: always
+        stop_grace_period: 3m
     geth:
         image: ethereum/client-go:${GETH_VERSION}
         entrypoint: /bin/sh
@@ -40,3 +42,5 @@ services:
         env_file: .env
         command: /root/scripts/start-geth.sh
         restart: always
+        stop_grace_period: 3m
+
