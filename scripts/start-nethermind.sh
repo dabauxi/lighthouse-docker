@@ -2,6 +2,9 @@
 #
 # Starts a local nethermind node.
 
+#--JsonRpc.AdditionalRpcUrls="http://0.0.0.0:8551|http;ws|engine;eth;subscribe" \
+#--JsonRpc.JwtSecretFile="/secrets/jwtsecret" \
+
 exec ./Nethermind.Runner \
     --config mainnet \
     --Sync.SnapSync true \
@@ -9,8 +12,6 @@ exec ./Nethermind.Runner \
     --JsonRpc.EnabledModules "Admin,Web3,Eth,Subscribe,Net" \
     --JsonRpc.Host 0.0.0.0 \
     --JsonRpc.Port 8545 \
-    #--JsonRpc.AdditionalRpcUrls="http://0.0.0.0:8551|http;ws|engine;eth;subscribe" \
-    #--JsonRpc.JwtSecretFile="/secrets/jwtsecret" \
     --Init.WebSocketsEnabled true \
     --datadir /nethermind/data \
     --Pruning.Mode "Full" \
