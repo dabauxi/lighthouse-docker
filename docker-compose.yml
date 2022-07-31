@@ -30,16 +30,23 @@ services:
         restart: always
     nethermind:
         image: nethermind/nethermind:${NETHERMIND_VERSION}
-        entrypoint: /bin/bash
+        container_name: nethermind
+        restart: always
+        stop_grace_period: 3m
         volumes:
-            - ${NETHERMIND_DATA}:/nethermind/data
-            - ./scripts:/nethermind/scripts:ro
+        -  ${NETHERMIND_DATA}:/nethermind/data
+        - ./scripts:/nethermind/scripts:ro
+        #- ./secrets/jwtsecret.txt:/secrets/jwtsecret:ro
+        entrypoint: /bin/bash
         ports:
             - 8545:8545/tcp
             - 8545:8545/udp
+            - 8546:8546/tcp
+            - 8546:8546/udp
+            - 8551:8551/tcp
+            - 8551:8551/udp
             - 30303:30303/tcp
             - 30303:30303/udp
         command: ./scripts/start-nethermind.sh
-        restart: always
         env_file: .env
 
