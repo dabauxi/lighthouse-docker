@@ -16,4 +16,5 @@
   --Sync.AncientReceiptsBarrier "11052984" 
   --Sync.DownloadBodiesInFastSync true \
   --Sync.DownloadReceiptsInFastSync true \
-  --HealthChecks.Enabled true
+  --HealthChecks.Enabled true \
+  --HealthChecks.*
